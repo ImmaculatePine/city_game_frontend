@@ -5,11 +5,16 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "parcel index.html"
+    "start": "parcel index.html",
+    "lint": "prettier -l \"src/**/*.{js,html,css,scss}\"",
+    "lint-fix": "prettier --write \"src/**/*.{js,html,css,scss}\""
   },
   "author": "Aleksandr Borovykh",
   "license": "ISC",
   "dependencies": {
     "parcel-bundler": "^1.8.1"
+  },
+  "devDependencies": {
+    "prettier": "^1.12.1"
   }
 }
