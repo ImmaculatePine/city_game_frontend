@@ -6,15 +6,33 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "parcel index.html",
-    "lint": "prettier -l \"src/**/*.{js,html,css,scss}\"",
-    "lint-fix": "prettier --write \"src/**/*.{js,html,css,scss}\""
+    "lint": "eslint --ext .js src",
+    "lint-fix": "eslint --ext .js src --fix"
   },
   "author": "Aleksandr Borovykh",
   "license": "ISC",
   "dependencies": {
-    "parcel-bundler": "^1.8.1"
+    "axios": "^0.18.0",
+    "humps": "^2.0.1",
+    "lodash": "^4.17.10",
+    "normalizr": "^3.2.4",
+    "parcel-bundler": "^1.8.1",
+    "prop-types": "^15.6.1",
+    "react": "^16.4.0",
+    "react-dom": "^16.4.0",
+    "react-redux": "^5.0.7",
+    "redux": "^4.0.0",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.2.0"
   },
   "devDependencies": {
+    "babel-eslint": "^8.2.3",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "eslint": "^4.19.1",
+    "eslint-plugin-prettier": "^2.6.0",
+    "eslint-plugin-react": "^7.8.2",
     "prettier": "^1.12.1"
   }
 }

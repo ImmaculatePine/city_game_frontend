@@ -6,3 +6,7 @@ dist
 
 # NodeJS dependencies
 node_modules
+
+# dotenv file
+.env
+.envrc
