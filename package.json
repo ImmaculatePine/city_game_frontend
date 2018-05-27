@@ -1,0 +1,15 @@
+{
+  "name": "city_game-frontend",
+  "version": "1.0.0",
+  "description": "Frontend for city game navigator",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "parcel index.html"
+  },
+  "author": "Aleksandr Borovykh",
+  "license": "ISC",
+  "dependencies": {
+    "parcel-bundler": "^1.8.1"
+  }
+}
