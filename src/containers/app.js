@@ -4,8 +4,9 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { fetchPlaces } from '../actions/places'
 import { getPlaces } from '../selectors/places'
+import App from '../components/app'
 
-export class App extends Component {
+export class AppContainer extends Component {
   static propTypes = {
     places: PropTypes.arrayOf(PropTypes.object).isRequired,
     fetchPlaces: PropTypes.func.isRequired
@@ -17,10 +18,7 @@ export class App extends Component {
   }
 
   render() {
-    const places = this.props.places
-    return (
-      <ul>{places.map(place => <li key={place.id}>{place.address}</li>)}</ul>
-    )
+    return <App {...this.props} />
   }
 }
 
@@ -32,4 +30,4 @@ const mapDispatchToProps = dispatch => ({
   fetchPlaces: bindActionCreators(fetchPlaces, dispatch)
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default connect(mapStateToProps, mapDispatchToProps)(AppContainer)
