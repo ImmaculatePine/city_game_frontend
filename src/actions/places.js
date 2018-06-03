@@ -11,7 +11,7 @@ const fetchPlacesRequest = () => ({
   type: FETCH_PLACES_REQUEST
 })
 
-const fetchPlacesSuccess = data => {
+const fetchPlacesSuccess = ({ data }) => {
   return {
     type: FETCH_PLACES_SUCCESS,
     payload: normalize(data, [placeSchema])
