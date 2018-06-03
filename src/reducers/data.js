@@ -1,13 +1,16 @@
 import { merge } from 'lodash'
 import { FETCH_PLACES_SUCCESS } from '../constants/places'
+import { FETCH_GAMES_SUCCESS } from '../constants/games'
 import { ROUTE_SUCCESS } from '../constants/directions'
 
 const initialState = {
   entities: {
     places: {},
+    games: {},
     directions: null
   },
-  placeIds: []
+  placeIds: [],
+  gameIds: []
 }
 
 export default (state = initialState, { type, payload } = {}) => {
@@ -18,6 +21,14 @@ export default (state = initialState, { type, payload } = {}) => {
         entities: merge({}, state.entities, payload.entities),
         placeIds: [...state.placeIds, ...payload.result]
       }
+
+    case FETCH_GAMES_SUCCESS:
+      return {
+        ...state,
+        entities: merge({}, state.entities, payload.entities),
+        gameIds: [...state.gameIds, ...payload.result]
+      }
+
     case ROUTE_SUCCESS:
       return {
         ...state,

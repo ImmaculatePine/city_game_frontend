@@ -7,7 +7,7 @@ import 'bulma/bulma.sass'
 export default class App extends Component {
   static propTypes = {
     places: PropTypes.arrayOf(PropTypes.object).isRequired,
-    fetchPlaces: PropTypes.func.isRequired,
+    games: PropTypes.arrayOf(PropTypes.object).isRequired,
     route: PropTypes.func.isRequired
   }
 
@@ -31,11 +31,15 @@ export default class App extends Component {
   }
 
   render() {
-    const { places } = this.props
+    const { places, games } = this.props
     return (
       <section className="section">
         <div className="columns">
           <div className="column is-one-third">
+            <h1>Games</h1>
+            <ul>{games.map(game => <li key={game.id}>{game.name}</li>)}</ul>
+
+            <h1>Places</h1>
             <button className="button" onClick={this.onClickOptimize}>
               Optimize route
             </button>
