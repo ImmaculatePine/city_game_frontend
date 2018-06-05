@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Provider } from 'react-redux'
+import { BrowserRouter } from 'react-router-dom'
 import configureStore from '../store/configure-store'
 import AppContainer from './app'
 
@@ -9,7 +10,9 @@ export default class RootContainer extends Component {
   render() {
     return (
       <Provider store={store}>
-        <AppContainer />
+        <BrowserRouter>
+          <AppContainer />
+        </BrowserRouter>
       </Provider>
     )
   }

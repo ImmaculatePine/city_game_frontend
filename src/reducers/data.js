@@ -1,6 +1,6 @@
-import { merge } from 'lodash'
+import { merge, uniq } from 'lodash'
 import { FETCH_PLACES_SUCCESS } from '../constants/places'
-import { FETCH_GAMES_SUCCESS } from '../constants/games'
+import { FETCH_GAMES_SUCCESS, FETCH_GAME_SUCCESS } from '../constants/games'
 import { ROUTE_SUCCESS } from '../constants/directions'
 
 const initialState = {
@@ -19,14 +19,21 @@ export default (state = initialState, { type, payload } = {}) => {
       return {
         ...state,
         entities: merge({}, state.entities, payload.entities),
-        placeIds: [...state.placeIds, ...payload.result]
+        placeIds: uniq([...state.placeIds, ...payload.result])
       }
 
     case FETCH_GAMES_SUCCESS:
       return {
         ...state,
         entities: merge({}, state.entities, payload.entities),
-        gameIds: [...state.gameIds, ...payload.result]
+        gameIds: uniq([...state.gameIds, ...payload.result])
+      }
+
+    case FETCH_GAME_SUCCESS:
+      return {
+        ...state,
+        entities: merge({}, state.entities, payload.entities),
+        gameIds: uniq([...state.gameIds, payload.result])
       }
 
     case ROUTE_SUCCESS:
