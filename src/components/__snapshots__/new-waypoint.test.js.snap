@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NewWaypoint renders a list of places which are not used as waypoints yet 1`] = `
+<div>
+  <select
+    onChange={[Function]}
+    value=""
+  >
+    <option
+      value=""
+    />
+    <option
+      value={1}
+    >
+      Not used place
+    </option>
+  </select>
+  <button
+    className="button"
+    onClick={[Function]}
+  >
+    Add
+  </button>
+</div>
+`;

@@ -2,12 +2,12 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
-import MapContainer from '../containers/map'
+import Map from '../containers/map'
+import NewWaypoint from '../containers/new-waypoint'
 
 export default class App extends Component {
   static propTypes = {
     game: PropTypes.object,
-    places: PropTypes.arrayOf(PropTypes.object).isRequired,
     route: PropTypes.func.isRequired
   }
 
@@ -18,7 +18,9 @@ export default class App extends Component {
 
   onClickOptimize(e) {
     e.preventDefault()
-    const places = this.props.places.map(place => place.address)
+    const places = this.props.game.waypoints.map(
+      waypoint => waypoint.place.address
+    )
     const [origin, ...tail] = places
     const destination = tail.slice(-1)[0]
     const waypoints = tail.slice(0, -1)
@@ -41,7 +43,8 @@ export default class App extends Component {
   }
 
   _renderGame() {
-    const { game, places } = this.props
+    const { game } = this.props
+    const waypoints = game.waypoints || []
     return (
       <div className="columns">
         <div className="column is-one-third">
@@ -49,12 +52,17 @@ export default class App extends Component {
           <button className="button" onClick={this.onClickOptimize}>
             Optimize route
           </button>
+          <NewWaypoint game={game} />
           <ul>
-            {places.map(place => <li key={place.id}>{place.address}</li>)}
+            {waypoints.map(waypoint => (
+              <li key={waypoint.id}>
+                {waypoint.place.name} <small>{waypoint.place.address}</small>
+              </li>
+            ))}
           </ul>
         </div>
         <div className="column">
-          <MapContainer />
+          <Map />
         </div>
       </div>
     )
