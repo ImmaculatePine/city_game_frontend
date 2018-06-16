@@ -12,14 +12,17 @@ export default class GamesList extends Component {
     const { games } = this.props
     return (
       <div>
-        <h1>Games</h1>
-        <ul>
-          {games.map(game => (
-            <li key={game.id}>
-              <Link to={`/games/${game.id}`}>{game.name}</Link>
-            </li>
-          ))}
-        </ul>
+        <table className="table">
+          <tbody>
+            {games.map(game => (
+              <tr key={game.id}>
+                <td>
+                  <Link to={`/games/${game.id}`}>{game.name}</Link>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     )
   }

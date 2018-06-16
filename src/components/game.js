@@ -1,7 +1,6 @@
 /* global google */
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom'
 import Map from '../containers/map'
 import NewWaypoint from '../containers/new-waypoint'
 
@@ -42,7 +41,6 @@ export default class App extends Component {
     const { game } = this.props
     return (
       <section className="section">
-        <Link to="/">Back to games list</Link>
         {game ? this._renderGame() : this._renderNotFound()}
       </section>
     )
