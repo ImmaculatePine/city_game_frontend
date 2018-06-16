@@ -4,7 +4,10 @@ import WaypointsAPI from '../api/waypoints'
 import {
   CREATE_WAYPOINT_REQUEST,
   CREATE_WAYPOINT_SUCCESS,
-  CREATE_WAYPOINT_FAILURE
+  CREATE_WAYPOINT_FAILURE,
+  DELETE_WAYPOINT_REQUEST,
+  DELETE_WAYPOINT_SUCCESS,
+  DELETE_WAYPOINT_FAILURE
 } from '../constants/waypoints'
 
 const createWaypointRequest = () => ({
@@ -30,5 +33,31 @@ export const createWaypoint = (gameId, params) => {
     WaypointsAPI.create(gameId, params)
       .then(({ data }) => dispatch(createWaypointSuccess(gameId, data)))
       .catch(error => dispatch(createWaypointFailure(error)))
+  }
+}
+
+const deleteWaypointRequest = () => ({
+  type: DELETE_WAYPOINT_REQUEST
+})
+
+const deleteWaypointSuccess = (gameId, waypointId) => {
+  return {
+    type: DELETE_WAYPOINT_SUCCESS,
+    payload: { gameId, waypointId }
+  }
+}
+
+const deleteWaypointFailure = error => ({
+  type: DELETE_WAYPOINT_FAILURE,
+  payload: error
+})
+
+export const deleteWaypoint = (gameId, waypointId) => {
+  return dispatch => {
+    dispatch(deleteWaypointRequest())
+
+    WaypointsAPI.delete(gameId, waypointId)
+      .then(() => dispatch(deleteWaypointSuccess(gameId, waypointId)))
+      .catch(error => dispatch(deleteWaypointFailure(error)))
   }
 }

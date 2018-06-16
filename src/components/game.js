@@ -8,6 +8,7 @@ import NewWaypoint from '../containers/new-waypoint'
 export default class App extends Component {
   static propTypes = {
     game: PropTypes.object,
+    deleteWaypoint: PropTypes.func.isRequired,
     route: PropTypes.func.isRequired
   }
 
@@ -32,6 +33,11 @@ export default class App extends Component {
     })
   }
 
+  onClickDelete(waypointId) {
+    const { game, deleteWaypoint } = this.props
+    deleteWaypoint(game.id, waypointId)
+  }
+
   render() {
     const { game } = this.props
     return (
@@ -53,13 +59,29 @@ export default class App extends Component {
             Optimize route
           </button>
           <NewWaypoint game={game} />
-          <ul>
-            {waypoints.map(waypoint => (
-              <li key={waypoint.id}>
-                {waypoint.place.name} <small>{waypoint.place.address}</small>
-              </li>
-            ))}
-          </ul>
+
+          <table className="table">
+            <tbody>
+              {waypoints.map(waypoint => (
+                <tr key={waypoint.id}>
+                  <td>{waypoint.place.name}</td>
+                  <td>
+                    <small>{waypoint.place.address}</small>
+                  </td>
+                  <td>
+                    <button
+                      className="button is-danger is-outlined"
+                      onClick={() => this.onClickDelete(waypoint.id)}
+                    >
+                      <span className="icon is-small">
+                        <i className="fas fa-times" />
+                      </span>
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
         <div className="column">
           <Map />

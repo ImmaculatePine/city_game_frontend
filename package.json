@@ -12,6 +12,7 @@
   "author": "Aleksandr Borovykh",
   "license": "ISC",
   "dependencies": {
+    "@fortawesome/fontawesome-free-webfonts": "^1.0.9",
     "axios": "^0.18.0",
     "bulma": "^0.7.1",
     "humps": "^2.0.1",

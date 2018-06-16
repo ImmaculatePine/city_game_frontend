@@ -1,7 +1,10 @@
-import { merge, uniq } from 'lodash'
+import { mergeWith, uniq, isArray } from 'lodash'
 import { FETCH_PLACES_SUCCESS } from '../constants/places'
 import { FETCH_GAMES_SUCCESS, FETCH_GAME_SUCCESS } from '../constants/games'
-import { CREATE_WAYPOINT_SUCCESS } from '../constants/waypoints'
+import {
+  CREATE_WAYPOINT_SUCCESS,
+  DELETE_WAYPOINT_SUCCESS
+} from '../constants/waypoints'
 import { ROUTE_SUCCESS } from '../constants/directions'
 
 const initialState = {
@@ -14,6 +17,17 @@ const initialState = {
   placeIds: [],
   gameIds: []
 }
+
+const gameWaypoints = (state, gameId) =>
+  state.entities.games[gameId].waypoints || []
+
+const rewriteArrays = (objValue, srcValue) => {
+  if (isArray(objValue)) {
+    return srcValue
+  }
+}
+
+const merge = (...args) => mergeWith.apply(undefined, [...args, rewriteArrays])
 
 export default (state = initialState, { type, payload } = {}) => {
   switch (type) {
@@ -45,9 +59,23 @@ export default (state = initialState, { type, payload } = {}) => {
           games: {
             [payload.gameId]: {
               waypoints: uniq([
-                ...(state.entities.games[payload.gameId].waypoints || []),
+                ...gameWaypoints(state, payload.gameId),
                 payload.data.result
               ])
+            }
+          }
+        })
+      }
+
+    case DELETE_WAYPOINT_SUCCESS:
+      return {
+        ...state,
+        entities: merge({}, state.entities, {
+          games: {
+            [payload.gameId]: {
+              waypoints: gameWaypoints(state, payload.gameId).filter(
+                id => id != payload.waypointId
+              )
             }
           }
         })

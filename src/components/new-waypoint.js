@@ -26,8 +26,10 @@ export default class NewWaypoint extends Component {
     const { game, createWaypoint } = this.props
     const { placeId } = this.state
     const gameId = game.id
-    const position = (game.waypoints || []).length
+    const positions = (game.waypoints || []).map(waypoint => waypoint.position)
+    const position = Math.max(-1, ...positions) + 1
     createWaypoint(gameId, { placeId, position })
+    this.setState({ placeId: '' })
   }
 
   render() {

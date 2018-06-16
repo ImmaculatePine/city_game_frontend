@@ -1,5 +1,8 @@
 import reducer from './data'
-import { CREATE_WAYPOINT_SUCCESS } from '../constants/waypoints'
+import {
+  CREATE_WAYPOINT_SUCCESS,
+  DELETE_WAYPOINT_SUCCESS
+} from '../constants/waypoints'
 
 describe('CREATE_WAYPOINT_SUCCESS', () => {
   const action = {
@@ -66,6 +69,56 @@ describe('CREATE_WAYPOINT_SUCCESS', () => {
         }
       },
       gameIds: [1]
+    })
+  })
+})
+
+describe('DELETE_WAYPOINT_SUCCESS', () => {
+  const action = {
+    type: DELETE_WAYPOINT_SUCCESS,
+    payload: {
+      gameId: 1,
+      waypointId: 100
+    }
+  }
+
+  test('removes waypoint ID from waypoints list', () => {
+    const prevState = {
+      entities: {
+        games: {
+          1: { name: 'Game 1', waypoints: [99, 100, 101] }
+        }
+      }
+    }
+
+    const nextState = reducer(prevState, action)
+
+    expect(nextState).toEqual({
+      entities: {
+        games: {
+          1: { name: 'Game 1', waypoints: [99, 101] }
+        }
+      }
+    })
+  })
+
+  test('does not change waypoints list if waypoint ID is not there', () => {
+    const prevState = {
+      entities: {
+        games: {
+          1: { name: 'Game 1', waypoints: [99, 101] }
+        }
+      }
+    }
+
+    const nextState = reducer(prevState, action)
+
+    expect(nextState).toEqual({
+      entities: {
+        games: {
+          1: { name: 'Game 1', waypoints: [99, 101] }
+        }
+      }
     })
   })
 })
