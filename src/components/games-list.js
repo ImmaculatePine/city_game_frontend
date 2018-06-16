@@ -4,14 +4,13 @@ import { Link } from 'react-router-dom'
 
 export default class GamesList extends Component {
   static propTypes = {
-    games: PropTypes.arrayOf(PropTypes.object).isRequired,
-    fetchGames: PropTypes.func.isRequired
+    games: PropTypes.arrayOf(PropTypes.object).isRequired
   }
 
   render() {
     const { games } = this.props
     return (
-      <div>
+      <section className="section">
         <table className="table">
           <tbody>
             {games.map(game => (
@@ -23,7 +22,7 @@ export default class GamesList extends Component {
             ))}
           </tbody>
         </table>
-      </div>
+      </section>
     )
   }
 }
