@@ -1,8 +1,8 @@
 /* global google */
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 import Map from '../containers/map'
-import NewWaypoint from '../containers/new-waypoint'
 
 export default class App extends Component {
   static propTypes = {
@@ -52,11 +52,32 @@ export default class App extends Component {
     return (
       <div className="columns">
         <div className="column is-one-third">
-          <h1>{game.name}</h1>
-          <button className="button" onClick={this.onClickOptimize}>
-            Optimize route
-          </button>
-          <NewWaypoint game={game} />
+          <h1 className="title">{game.name}</h1>
+
+          <nav className="level is-mobile">
+            <div className="level-left">
+              <div className="level-item">
+                <Link
+                  className="button is-success"
+                  to={`/games/${game.id}/waypoints/new`}
+                >
+                  <span className="icon is-small">
+                    <i className="fas fa-plus" />
+                  </span>
+                  <span>Add waypoint</span>
+                </Link>
+              </div>
+
+              <div className="level-item">
+                <button className="button" onClick={this.onClickOptimize}>
+                  <span className="icon is-small">
+                    <i className="fas fa-calculator" />
+                  </span>
+                  <span>Optimize route</span>
+                </button>
+              </div>
+            </div>
+          </nav>
 
           <table className="table">
             <tbody>

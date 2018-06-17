@@ -1,25 +1,79 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`NewWaypoint renders a list of places which are not used as waypoints yet 1`] = `
-<div>
-  <select
-    onChange={[Function]}
-    value=""
+<div
+  className="modal is-active"
+>
+  <div
+    className="modal-background"
+  />
+  <div
+    className="modal-card"
   >
-    <option
-      value=""
-    />
-    <option
-      value={1}
+    <form
+      onSubmit={[Function]}
     >
-      Not used place
-    </option>
-  </select>
-  <button
-    className="button"
+      <header
+        className="modal-card-head"
+      >
+        <p
+          className="modal-card-title"
+        >
+          Add waypoint
+        </p>
+      </header>
+      <section
+        className="modal-card-body"
+      >
+        <div
+          className="field"
+        >
+          <div
+            className="control"
+          >
+            <select
+              name="placeId"
+              onChange={[Function]}
+              value=""
+            >
+              <option
+                value=""
+              />
+              <option
+                value={1}
+              >
+                Not used place
+              </option>
+            </select>
+          </div>
+        </div>
+      </section>
+      <footer
+        className="modal-card-foot"
+      >
+        <button
+          className="button is-success"
+          onClick={[Function]}
+        >
+          Add
+        </button>
+        <a
+          className="button"
+          href="/games/1"
+          onClick={[Function]}
+        >
+          Back
+        </a>
+      </footer>
+    </form>
+  </div>
+  <a
+    aria-label="close"
+    className="modal-close is-large"
+    href="/games/1"
     onClick={[Function]}
-  >
-    Add
-  </button>
+  />
 </div>
 `;
+
+exports[`NewWaypoint renders empty div when game is not found 1`] = `<div />`;
