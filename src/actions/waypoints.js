@@ -30,7 +30,7 @@ export const createWaypoint = (gameId, params) => {
   return dispatch => {
     dispatch(createWaypointRequest())
 
-    WaypointsAPI.create(gameId, params)
+    return WaypointsAPI.create(gameId, params)
       .then(({ data }) => dispatch(createWaypointSuccess(gameId, data)))
       .catch(error => dispatch(createWaypointFailure(error)))
   }
@@ -56,7 +56,7 @@ export const deleteWaypoint = (gameId, waypointId) => {
   return dispatch => {
     dispatch(deleteWaypointRequest())
 
-    WaypointsAPI.delete(gameId, waypointId)
+    return WaypointsAPI.delete(gameId, waypointId)
       .then(() => dispatch(deleteWaypointSuccess(gameId, waypointId)))
       .catch(error => dispatch(deleteWaypointFailure(error)))
   }

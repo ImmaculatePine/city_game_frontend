@@ -30,7 +30,7 @@ export const fetchGames = () => {
   return dispatch => {
     dispatch(fetchGamesRequest())
 
-    GamesAPI.fetch()
+    return GamesAPI.fetch()
       .then(({ data }) => dispatch(fetchGamesSuccess(data)))
       .catch(error => dispatch(fetchGamesFailure(error)))
   }
@@ -56,7 +56,7 @@ export const fetchGame = id => {
   return dispatch => {
     dispatch(fetchGameRequest())
 
-    GamesAPI.fetchOne(id)
+    return GamesAPI.fetchOne(id)
       .then(({ data }) => dispatch(fetchGameSuccess(data)))
       .catch(error => dispatch(fetchGameFailure(error)))
   }

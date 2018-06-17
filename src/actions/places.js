@@ -7,7 +7,10 @@ import {
   FETCH_PLACES_FAILURE,
   CREATE_PLACE_REQUEST,
   CREATE_PLACE_SUCCESS,
-  CREATE_PLACE_FAILURE
+  CREATE_PLACE_FAILURE,
+  DELETE_PLACE_REQUEST,
+  DELETE_PLACE_SUCCESS,
+  DELETE_PLACE_FAILURE
 } from '../constants/places'
 
 const fetchPlacesRequest = () => ({
@@ -62,5 +65,31 @@ export const createPlace = (params, onSuccess) => {
         onSuccess()
       })
       .catch(error => dispatch(createPlaceFailure(error)))
+  }
+}
+
+const deletePlaceRequest = () => ({
+  type: DELETE_PLACE_REQUEST
+})
+
+const deletePlaceSuccess = placeId => {
+  return {
+    type: DELETE_PLACE_SUCCESS,
+    payload: { placeId }
+  }
+}
+
+const deletePlaceFailure = error => ({
+  type: DELETE_PLACE_FAILURE,
+  payload: error
+})
+
+export const deletePlace = id => {
+  return dispatch => {
+    dispatch(deletePlaceRequest())
+
+    return PlacesAPI.delete(id)
+      .then(() => dispatch(deletePlaceSuccess(id)))
+      .catch(error => dispatch(deletePlaceFailure(error)))
   }
 }

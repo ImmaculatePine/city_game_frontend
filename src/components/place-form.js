@@ -53,7 +53,7 @@ export default class PlaceForm extends Component {
       <div className="modal-card">
         <form onSubmit={this.handleSubmit}>
           <header className="modal-card-head">
-            <p className="modal-card-title">{this.title}</p>
+            <p className="modal-card-title">{this.props.title}</p>
           </header>
 
           <section className="modal-card-body">
