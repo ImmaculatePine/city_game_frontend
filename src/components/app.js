@@ -3,6 +3,7 @@ import { Route, Link, NavLink } from 'react-router-dom'
 import GamesListContainer from '../containers/games-list'
 import GameContainer from '../containers/game'
 import PlacesListContainer from '../containers/places-list'
+import NewPlace from '../containers/new-place'
 import 'bulma/bulma.sass'
 import '@fortawesome/fontawesome-free-webfonts/scss/fontawesome.scss'
 import '@fortawesome/fontawesome-free-webfonts/scss/fa-solid.scss'
@@ -47,6 +48,7 @@ export default class App extends Component {
         <Route exact path="/" component={GamesListContainer} />
         <Route path="/games/:id" component={GameContainer} />
         <Route path="/places" component={PlacesListContainer} />
+        <Route path="/places/new" component={NewPlace} />
       </div>
     )
   }

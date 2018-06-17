@@ -1,5 +1,5 @@
 import { mergeWith, uniq, isArray } from 'lodash'
-import { FETCH_PLACES_SUCCESS } from '../constants/places'
+import { FETCH_PLACES_SUCCESS, CREATE_PLACE_SUCCESS } from '../constants/places'
 import { FETCH_GAMES_SUCCESS, FETCH_GAME_SUCCESS } from '../constants/games'
 import {
   CREATE_WAYPOINT_SUCCESS,
@@ -36,6 +36,13 @@ export default (state = initialState, { type, payload } = {}) => {
         ...state,
         entities: merge({}, state.entities, payload.entities),
         placeIds: uniq([...state.placeIds, ...payload.result])
+      }
+
+    case CREATE_PLACE_SUCCESS:
+      return {
+        ...state,
+        entities: merge({}, state.entities, payload.entities),
+        placeIds: uniq([...state.placeIds, payload.result])
       }
 
     case FETCH_GAMES_SUCCESS:
