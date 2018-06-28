@@ -7,6 +7,7 @@ import Map from '../containers/map'
 export default class App extends Component {
   static propTypes = {
     game: PropTypes.object,
+    reorderWaypoints: PropTypes.func.isRequired,
     deleteWaypoint: PropTypes.func.isRequired,
     route: PropTypes.func.isRequired
   }
@@ -18,18 +19,20 @@ export default class App extends Component {
 
   onClickOptimize(e) {
     e.preventDefault()
-    const places = this.props.game.waypoints.map(
-      waypoint => waypoint.place.address
-    )
+    const { game, route, reorderWaypoints } = this.props
+    const places = game.waypoints.map(waypoint => waypoint.place.address)
     const [origin, ...tail] = places
     const destination = tail.slice(-1)[0]
     const waypoints = tail.slice(0, -1)
-    this.props.route({
+
+    route({
       origin,
       destination,
       waypoints,
       google: google
-    })
+    }).then(data =>
+      reorderWaypoints(game, data.payload.routes[0].waypoint_order)
+    )
   }
 
   onClickDelete(waypointId) {

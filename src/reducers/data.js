@@ -4,7 +4,11 @@ import {
   CREATE_PLACE_SUCCESS,
   DELETE_PLACE_SUCCESS
 } from '../constants/places'
-import { FETCH_GAMES_SUCCESS, FETCH_GAME_SUCCESS } from '../constants/games'
+import {
+  FETCH_GAMES_SUCCESS,
+  FETCH_GAME_SUCCESS,
+  UPDATE_GAME_SUCCESS
+} from '../constants/games'
 import {
   CREATE_WAYPOINT_SUCCESS,
   DELETE_WAYPOINT_SUCCESS
@@ -63,6 +67,13 @@ export default (state = initialState, { type, payload } = {}) => {
       }
 
     case FETCH_GAME_SUCCESS:
+      return {
+        ...state,
+        entities: merge({}, state.entities, payload.entities),
+        gameIds: uniq([...state.gameIds, payload.result])
+      }
+
+    case UPDATE_GAME_SUCCESS:
       return {
         ...state,
         entities: merge({}, state.entities, payload.entities),

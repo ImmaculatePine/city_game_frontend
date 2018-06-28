@@ -3,6 +3,7 @@ import {
   ROUTE_SUCCESS,
   ROUTE_FAILURE
 } from '../constants/directions'
+import DirectionAPI from '../api/directions'
 
 const routeRequest = () => ({
   type: ROUTE_REQUEST
@@ -24,23 +25,8 @@ export const route = ({ origin, destination, waypoints, google }) => {
   return dispatch => {
     dispatch(routeRequest())
 
-    const DirectionsService = new google.maps.DirectionsService()
-
-    DirectionsService.route(
-      {
-        origin,
-        destination,
-        waypoints: waypoints.map(location => ({ location })),
-        optimizeWaypoints: true,
-        travelMode: google.maps.TravelMode.WALKING
-      },
-      (data, status) => {
-        if (status === google.maps.DirectionsStatus.OK) {
-          dispatch(routeSuccess(data))
-        } else {
-          dispatch(routeFailure(data))
-        }
-      }
-    )
+    return DirectionAPI.route({ origin, destination, waypoints, google })
+      .then(data => dispatch(routeSuccess(data)))
+      .catch(error => dispatch(routeFailure(error)))
   }
 }
