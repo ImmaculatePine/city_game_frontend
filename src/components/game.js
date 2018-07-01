@@ -106,7 +106,7 @@ export default class App extends Component {
           </table>
         </div>
         <div className="column">
-          <Map />
+          <Map waypoints={waypoints} />
         </div>
       </div>
     )

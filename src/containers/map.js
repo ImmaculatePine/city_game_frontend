@@ -1,14 +1,13 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { getPlaces } from '../selectors/places'
 import { getDirections } from '../selectors/directions'
 import { GOOGLE_MAPS_API_KEY } from '../config'
 import Map from '../components/map'
 
 export class MapContainer extends Component {
   static propTypes = {
-    places: PropTypes.arrayOf(PropTypes.object).isRequired,
+    waypoints: PropTypes.arrayOf(PropTypes.object).isRequired,
     directions: PropTypes.object
   }
 
@@ -27,7 +26,6 @@ export class MapContainer extends Component {
 }
 
 const mapStateToProps = state => ({
-  places: getPlaces(state),
   directions: getDirections(state)
 })
 
